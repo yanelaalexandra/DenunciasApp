@@ -1,23 +1,19 @@
 package com.pachacama.denunciasapp.models;
 
-/**
- * Created by Alumno on 11/05/2018.
- */
-
 public class Usuario {
 
     private int id;
     private String username;
     private String password;
-    private String nombre;
+    private String nombres;
     private String tipo;
 
-    public Usuario(int id, String username, String password, String nombre, String tipo) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.nombre = nombre;
-        this.tipo = tipo;
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
     public int getId() {
@@ -44,14 +40,6 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getTipo() {
         return tipo;
     }
@@ -66,7 +54,7 @@ public class Usuario {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", nombre='" + nombre + '\'' +
+                ", nombres='" + nombres + '\'' +
                 ", tipo='" + tipo + '\'' +
                 '}';
     }

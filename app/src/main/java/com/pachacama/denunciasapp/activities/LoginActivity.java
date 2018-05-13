@@ -1,6 +1,8 @@
 package com.pachacama.denunciasapp.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,23 +20,45 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private SharedPreferences sharedPreferences;
     private static final String TAG = LoginActivity.class.getSimpleName();
-    private EditText username;
-    private EditText password;
+    private EditText usernameET;
+    private EditText passwordET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username = findViewById(R.id.username_input);
-        password = findViewById(R.id.password_input);
+        usernameET = findViewById(R.id.username_input);
+        passwordET = findViewById(R.id.password_input);
 
+        //---------------------------------------------------------------------------------------------
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String username = sharedPreferences.getString("username", null);
+
+        if(username != null){
+            usernameET.setText(username);
+            passwordET.requestFocus();
+        }
+        if(sharedPreferences.getBoolean("islogged", false)){
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String tipo = sharedPreferences.getString("tipo", "3");
+            if(tipo.equals("1")){
+                goDashboard2();
+                finish();
+            }else{
+                goDashboard();
+                finish();
+            }
+        }
     }
 
     public void callLogin(View view) {
-        final String user = username.getText().toString();
-        String pass = password.getText().toString();
+        final String user = usernameET.getText().toString();
+        String pass = passwordET.getText().toString();
 
         if (user.isEmpty() || pass .isEmpty()) {
             Toast.makeText(this, "Completar todos los campos", Toast.LENGTH_SHORT).show();
@@ -57,10 +81,22 @@ public class LoginActivity extends AppCompatActivity {
 
                         Usuario usuario = response.body();
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("usuario", usuario.getNombre());
-                        startActivity(intent);
-                        finish();
+                       SharedPreferences.Editor editor = sharedPreferences.edit();
+                        boolean success = editor
+                                .putString("username", usuario.getUsername())
+                                .putString("fullname" ,usuario.getNombres())
+                                .putInt("id", usuario.getId())
+                                .putString("tipo", usuario.getTipo())
+                                .putBoolean("islogged", true)
+                                .commit();
+
+                            if(usuario.getTipo().equals("1")){
+                                goDashboard2();
+                                finish();
+                            }else {
+                                goDashboard();
+                                finish();
+                            }
 
                     } else {
                         Log.e(TAG, "onError: " + response.errorBody().string());
@@ -86,4 +122,21 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
+
+    private void goDashboard() {
+        startActivity( new Intent(LoginActivity.this, MainActivity.class));
+    }
+
+    private void goDashboard2() {
+        startActivity(new Intent(LoginActivity.this, Main2Activity.class));
+    }
+
+    public void callSingUp(View view) {
+        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+    }
+
+
+
+
 }

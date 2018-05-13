@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.pachacama.denunciasapp.activities.RegisterDenunciaActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registro de Denuncia"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:textColor="@color/colorAccent"
+            android:layout_marginBottom="25dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            android:text="Ingresar Titulo"/>
+
+        <EditText
+            android:id="@+id/title_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            android:text="Ingresar Descripción"/>
+
+        <EditText
+            android:id="@+id/descripcion_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="3"
+            android:layout_marginBottom="10dp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            android:text="Ingresar dirección"/>
+
+        <EditText
+            android:id="@+id/location_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/takePhoto_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/imagen_preview"
+                android:background="@color/colorPrimary"
+                android:textColor="#ffffff"
+                android:drawableStart="@android:drawable/ic_menu_camera"
+                android:onClick="takePicture"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:text="Tomar una foto" />
+
+            <ImageView
+                android:id="@+id/imagen_preview"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="20dp"
+                android:src="@mipmap/ic_launcher" />
+
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar Denuncia"
+            android:background="@color/cardview_dark_background"
+            android:textColor="#ffffff"
+            android:onClick="callRegister"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:background="@color/colorAccent"
+            android:textColor="#ffffff"
+            android:onClick="callCancel"/>
+
+    </LinearLayout>
+
+
+</ScrollView>
